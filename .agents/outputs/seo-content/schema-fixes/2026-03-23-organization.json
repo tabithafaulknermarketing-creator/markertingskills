@@ -1,0 +1,22 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Marketing Skills",
+  "url": "https://github.com/coreyhaines31/marketingskills",
+  "description": "An open-source collection of AI agent skills for marketing — covering SEO, CRO, copywriting, paid ads, email sequences, and growth engineering. Works with Claude Code, Cursor, Windsurf, and any agent following the Agent Skills spec.",
+  "founder": {
+    "@type": "Person",
+    "name": "Corey Haines",
+    "url": "https://corey.co"
+  },
+  "sameAs": [
+    "https://github.com/coreyhaines31/marketingskills"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "Marketing Skills — Open Source",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "30+ AI agent marketing skills — free and open source under MIT license"
+  }
+}
