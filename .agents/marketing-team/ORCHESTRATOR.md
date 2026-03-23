@@ -77,29 +77,29 @@ Run each day (recommended: 06:00 local time).
 ### Wave 1 — Run first, no dependencies
 | Agent | DONE condition |
 |---|---|
-| **Strategy Agent** | `strategy/DONE.md` exists with today's date AND `outputs/strategy/product-marketing-context.md` updated/verified |
+| **Strategy Agent** | `/home/user/markertingskills/.agents/marketing-team/strategy/DONE.md` exists with today's date AND `/home/user/markertingskills/.agents/outputs/strategy/product-marketing-context.md` updated/verified |
 
 ### Wave 2 — Run after Wave 1 is complete
 | Agent | DONE condition |
 |---|---|
-| **SEO & Content Agent** | `seo-content/DONE.md` exists with today's date AND daily audit logged |
+| **SEO & Content Agent** | `/home/user/markertingskills/.agents/marketing-team/seo-content/DONE.md` exists with today's date AND daily audit logged |
 
 ### Wave 3 — Run in PARALLEL after Wave 2 is complete
 Both agents have no dependency on each other and can run simultaneously.
 
 | Agent | DONE condition |
 |---|---|
-| **CRO Agent** | `cro/DONE.md` exists with today's date AND experiment tracker updated |
-| **Content & Copy Agent** | `content-copy/DONE.md` exists with today's date AND daily social post written AND copy edits complete |
+| **CRO Agent** | `/home/user/markertingskills/.agents/marketing-team/cro/DONE.md` exists with today's date AND experiment tracker updated |
+| **Content & Copy Agent** | `/home/user/markertingskills/.agents/marketing-team/content-copy/DONE.md` exists with today's date AND daily social post written AND copy edits complete |
 
 ### Wave 4 — Run in PARALLEL after Wave 3 is complete
 All three agents are independent of each other and can run simultaneously.
 
 | Agent | DONE condition |
 |---|---|
-| **Paid & Measurement Agent** | `paid-measurement/DONE.md` exists with today's date AND campaign review logged AND tracking health checked |
-| **Growth & Retention Agent** | `growth-retention/DONE.md` exists with today's date AND churn signals reviewed AND referral tracker updated |
-| **Sales & GTM Agent** | `sales-gtm/DONE.md` exists with today's date AND pipeline reviewed AND launch calendar checked |
+| **Paid & Measurement Agent** | `/home/user/markertingskills/.agents/marketing-team/paid-measurement/DONE.md` exists with today's date AND campaign review logged AND tracking health checked |
+| **Growth & Retention Agent** | `/home/user/markertingskills/.agents/marketing-team/growth-retention/DONE.md` exists with today's date AND churn signals reviewed AND referral tracker updated |
+| **Sales & GTM Agent** | `/home/user/markertingskills/.agents/marketing-team/sales-gtm/DONE.md` exists with today's date AND pipeline reviewed AND launch calendar checked |
 
 ### Daily Sequence Summary
 ```
@@ -188,8 +188,12 @@ If any agent writes an `ESCALATION` block in its daily log:
 
 ## Global Rules for All Agents
 
-1. Every agent reads `.agents/outputs/strategy/product-marketing-context.md` before starting any task
+**Project root:** `/home/user/markertingskills` — always use absolute paths. Relative paths will fail in scheduled/automated sessions where the working directory may differ.
+
+1. Every agent reads `/home/user/markertingskills/.agents/outputs/strategy/product-marketing-context.md` before starting any task
 2. No agent contacts external parties (customers, prospects, press) autonomously — all outbound assets are drafted and saved, not sent
 3. No agent commits spend, changes live campaigns, or publishes to production without a human-approved deploy step — outputs are drafts and recommendations unless a deployment pipeline is explicitly configured
-4. All outputs are saved to `.agents/outputs/[agent-name]/` with date-stamped filenames
-5. Agents do not ask the human for input during normal operation — they make best-effort decisions and log assumptions
+4. All outputs are saved to `/home/user/markertingskills/.agents/outputs/[agent-name]/` with date-stamped filenames
+5. All DONE.md files are written to `/home/user/markertingskills/.agents/marketing-team/[agent-folder]/DONE.md`
+6. All escalations are written to `/home/user/markertingskills/.agents/marketing-team/ESCALATIONS.md`
+7. Agents do not ask the human for input during normal operation — they make best-effort decisions and log assumptions
