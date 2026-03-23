@@ -8,26 +8,30 @@ How to operate your 7-agent autonomous marketing team.
 
 Your marketing team consists of 7 AI agents, each with a dedicated instruction file and output directory. The team is orchestrated by `.agents/marketing-team/ORCHESTRATOR.md`. All agents read from a shared product context file before running any task.
 
+**Project root:** `/home/user/markertingskills`
+Always include this absolute path when triggering agents — relative paths will cause a "file not found" error.
+
 ```
-.agents/
-├── marketing-team/
-│   ├── ORCHESTRATOR.md          ← run order, dependencies, parallelism rules
-│   ├── ESCALATIONS.md           ← human attention required (auto-written by agents)
-│   ├── strategy/INSTRUCTIONS.md
-│   ├── seo-content/INSTRUCTIONS.md
-│   ├── cro/INSTRUCTIONS.md
-│   ├── content-copy/INSTRUCTIONS.md
-│   ├── paid-measurement/INSTRUCTIONS.md
-│   ├── growth-retention/INSTRUCTIONS.md
-│   └── sales-gtm/INSTRUCTIONS.md
-├── outputs/
-│   ├── strategy/
-│   ├── seo-content/
-│   ├── cro/
-│   ├── content-copy/
-│   ├── paid-measurement/
-│   ├── growth-retention/
-│   └── sales-gtm/
+/home/user/markertingskills/
+└── .agents/
+    ├── marketing-team/
+    │   ├── ORCHESTRATOR.md          ← run order, dependencies, parallelism rules
+    │   ├── ESCALATIONS.md           ← human attention required (auto-written by agents)
+    │   ├── strategy/INSTRUCTIONS.md
+    │   ├── seo-content/INSTRUCTIONS.md
+    │   ├── cro/INSTRUCTIONS.md
+    │   ├── content-copy/INSTRUCTIONS.md
+    │   ├── paid-measurement/INSTRUCTIONS.md
+    │   ├── growth-retention/INSTRUCTIONS.md
+    │   └── sales-gtm/INSTRUCTIONS.md
+    ├── outputs/
+    │   ├── strategy/
+    │   ├── seo-content/
+    │   ├── cro/
+    │   ├── content-copy/
+    │   ├── paid-measurement/
+    │   ├── growth-retention/
+    │   └── sales-gtm/
 └── skills/                      ← installed skill SKILL.md files
 ```
 
@@ -38,8 +42,10 @@ Your marketing team consists of 7 AI agents, each with a dedicated instruction f
 To run the complete daily sequence for all 7 agents:
 
 ```
+The working directory for this project is /home/user/markertingskills
+
 Run the full marketing team daily sequence defined in:
-.agents/marketing-team/ORCHESTRATOR.md
+/home/user/markertingskills/.agents/marketing-team/ORCHESTRATOR.md
 
 Follow the wave order:
   Wave 1: Strategy Agent
@@ -47,11 +53,13 @@ Follow the wave order:
   Wave 3: CRO Agent + Content & Copy Agent (parallel)
   Wave 4: Paid & Measurement + Growth & Retention + Sales & GTM (parallel)
 
-Each agent reads its INSTRUCTIONS.md from .agents/marketing-team/[agent-folder]/
-Each agent reads context from .agents/outputs/strategy/product-marketing-context.md
-Each agent saves outputs to .agents/outputs/[agent-name]/
-Each agent writes a DONE.md to .agents/marketing-team/[agent-folder]/DONE.md when complete
+Each agent reads its INSTRUCTIONS.md from /home/user/markertingskills/.agents/marketing-team/[agent-folder]/INSTRUCTIONS.md
+Each agent reads context from /home/user/markertingskills/.agents/outputs/strategy/product-marketing-context.md
+Each agent saves outputs to /home/user/markertingskills/.agents/outputs/[agent-name]/
+Each agent writes a DONE.md to /home/user/markertingskills/.agents/marketing-team/[agent-folder]/DONE.md when complete
 Do not advance to the next wave until all agents in the current wave are DONE
+Do not publish, send, or deploy anything — drafts and recommendations only
+Only escalate if a blocker or budget decision is encountered — write to /home/user/markertingskills/.agents/marketing-team/ESCALATIONS.md
 ```
 
 ---
@@ -61,8 +69,10 @@ Do not advance to the next wave until all agents in the current wave are DONE
 To run the weekly task sequence (run on Monday, or any day to catch up):
 
 ```
+The working directory for this project is /home/user/markertingskills
+
 Run the full marketing team weekly sequence defined in:
-.agents/marketing-team/ORCHESTRATOR.md
+/home/user/markertingskills/.agents/marketing-team/ORCHESTRATOR.md
 
 Follow the weekly schedule:
   Monday:    Strategy Agent — full context refresh + weekly planning
@@ -71,8 +81,9 @@ Follow the weekly schedule:
   Thursday:  Paid & Measurement + Growth & Retention + Sales & GTM (parallel) — all weekly reviews
   Friday:    Strategy Agent — cross-agent alignment memo + weekly strategy memo
 
-Each agent executes its Weekly Tasks section from its INSTRUCTIONS.md
-Outputs saved to .agents/outputs/[agent-name]/ with overwrite (weekly files) or append (logs)
+Each agent executes its Weekly Tasks section from its INSTRUCTIONS.md at:
+/home/user/markertingskills/.agents/marketing-team/[agent-folder]/INSTRUCTIONS.md
+Outputs saved to /home/user/markertingskills/.agents/outputs/[agent-name]/
 ```
 
 ---
@@ -82,29 +93,34 @@ Outputs saved to .agents/outputs/[agent-name]/ with overwrite (weekly files) or 
 To run one specific agent without triggering the full team:
 
 ```
+The working directory for this project is /home/user/markertingskills
+
 Run the [AGENT NAME] agent in isolation.
 
 Read its instructions from:
-  .agents/marketing-team/[agent-folder]/INSTRUCTIONS.md
+  /home/user/markertingskills/.agents/marketing-team/[agent-folder]/INSTRUCTIONS.md
 
-Pre-flight: read .agents/outputs/strategy/product-marketing-context.md first.
+Pre-flight: read /home/user/markertingskills/.agents/outputs/strategy/product-marketing-context.md first.
 
 Run: [daily tasks only] OR [weekly tasks only] OR [both]
 
-Save all outputs to .agents/outputs/[agent-name]/
-Write DONE.md to .agents/marketing-team/[agent-folder]/DONE.md when complete
+Save all outputs to /home/user/markertingskills/.agents/outputs/[agent-name]/
+Write DONE.md to /home/user/markertingskills/.agents/marketing-team/[agent-folder]/DONE.md when complete
 ```
 
 **Examples:**
 
 ```
 # Run only the CRO Agent daily tasks
+The working directory is /home/user/markertingskills
 Run the CRO Agent daily tasks from .agents/marketing-team/cro/INSTRUCTIONS.md
 
 # Run only the Content & Copy Agent weekly tasks
+The working directory is /home/user/markertingskills
 Run the Content & Copy Agent weekly tasks from .agents/marketing-team/content-copy/INSTRUCTIONS.md
 
 # Run only the Strategy Agent to refresh context
+The working directory is /home/user/markertingskills
 Run the Strategy Agent product-marketing-context refresh from .agents/marketing-team/strategy/INSTRUCTIONS.md
 ```
 
